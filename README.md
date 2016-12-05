@@ -14,10 +14,31 @@ An easier way to use fmdb
 
 1、集成DatabaseObject类自动在数据库中创建表
 
-![QQ20161205-1@2x](/Users/yitong/Desktop/QQ20161205-1@2x.png)
+@interface SystemAnnouncement : DatabaseObject
 
-2、增 ![QQ20161205-2@2x](/Users/yitong/Desktop/QQ20161205-2@2x.png)
+2、增 
 
-3、查、删![QQ20161205-3@2x](/Users/yitong/Desktop/QQ20161205-3@2x.png)
+```objective-c
+NSArray *items =[self simulateData];
+BOOL success =[SystemAnnouncement saveObjects:items];
+NSLog(@"批量插入：%@",success?@"成功":@"失败");
+```
+3、查、删
 
-4、更新 ![QQ20161205-4@2x](/Users/yitong/Desktop/QQ20161205-4@2x.png)
+```objective-c
+SystemAnnouncement *lastestItem =[[SystemAnnouncement objectsWithFormat:@"order by timestamp desc"] firstObject];        
+if (lastestItem) {
+    BOOL success =[lastestItem deleteObject];
+    NSLog(@"删除code=%@数据：%@",lastestItem.code,success?@"成功":@"失败");
+}
+```
+4、更新 
+
+```objective-c
+SystemAnnouncement *item =[SystemAnnouncement firstObjectWithFormat:@"where code ='%@'",@"sa_0"];
+if (item) {
+	item.code =@"sa_2016";
+	BOOL success =[item updateObject];
+	NSLog(@"更新code=%@数据：%@",@"sa_0",success?@"成功":@"失败");
+}
+```
