@@ -2,7 +2,7 @@
 #import "FMResultSet.h"
 #import "FMDatabasePool.h"
 
-#define kDatabasePassword @"wyong_sqlite_2016"
+#define kDatabasePassword @"wyong_sqlite_2017"
 
 #if ! __has_feature(objc_arc)
     #define FMDBAutorelease(__v) ([__v autorelease]);

@@ -19,10 +19,10 @@
 		8E10CB541DF4F32C001B64F1 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E10CB471DF4F32C001B64F1 /* FMDatabasePool.m */; };
 		8E10CB551DF4F32C001B64F1 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E10CB491DF4F32C001B64F1 /* FMDatabaseQueue.m */; };
 		8E10CB561DF4F32C001B64F1 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E10CB4C1DF4F32C001B64F1 /* FMResultSet.m */; };
-		8E10CB571DF4F32C001B64F1 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 8E10CB4E1DF4F32C001B64F1 /* sqlite3.c */; };
 		8E10CB5A1DF4F415001B64F1 /* RootTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E10CB591DF4F415001B64F1 /* RootTableViewController.m */; };
 		8E10CB621DF4F4E7001B64F1 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E10CB611DF4F4E7001B64F1 /* libsqlite3.0.tbd */; };
 		8E8E5D9D1DF501CA005D405D /* SystemAnnouncement.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E8E5D9C1DF501CA005D405D /* SystemAnnouncement.m */; };
+		8EE0055C1E8366CD007BAC55 /* libsqlcipher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EE0055A1E8366CD007BAC55 /* libsqlcipher.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,13 +49,13 @@
 		8E10CB4A1DF4F32C001B64F1 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
 		8E10CB4B1DF4F32C001B64F1 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		8E10CB4C1DF4F32C001B64F1 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
-		8E10CB4E1DF4F32C001B64F1 /* sqlite3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sqlite3.c; sourceTree = "<group>"; };
-		8E10CB4F1DF4F32C001B64F1 /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sqlite3.h; sourceTree = "<group>"; };
 		8E10CB581DF4F415001B64F1 /* RootTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootTableViewController.h; sourceTree = "<group>"; };
 		8E10CB591DF4F415001B64F1 /* RootTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootTableViewController.m; sourceTree = "<group>"; };
 		8E10CB611DF4F4E7001B64F1 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		8E8E5D9B1DF501CA005D405D /* SystemAnnouncement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemAnnouncement.h; sourceTree = "<group>"; };
 		8E8E5D9C1DF501CA005D405D /* SystemAnnouncement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemAnnouncement.m; sourceTree = "<group>"; };
+		8EE0055A1E8366CD007BAC55 /* libsqlcipher.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libsqlcipher.a; sourceTree = "<group>"; };
+		8EE0055B1E8366CD007BAC55 /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sqlite3.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +64,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E10CB621DF4F4E7001B64F1 /* libsqlite3.0.tbd in Frameworks */,
+				8EE0055C1E8366CD007BAC55 /* libsqlcipher.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,9 +117,9 @@
 		8E10CB3B1DF4F32C001B64F1 /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				8EE005591E8366CD007BAC55 /* sqlcipher */,
 				8E10CB3C1DF4F32C001B64F1 /* dbManager */,
 				8E10CB411DF4F32C001B64F1 /* fmdb */,
-				8E10CB4D1DF4F32C001B64F1 /* sqlCipher */,
 			);
 			path = lib;
 			sourceTree = "<group>";
@@ -152,15 +153,6 @@
 			path = fmdb;
 			sourceTree = "<group>";
 		};
-		8E10CB4D1DF4F32C001B64F1 /* sqlCipher */ = {
-			isa = PBXGroup;
-			children = (
-				8E10CB4E1DF4F32C001B64F1 /* sqlite3.c */,
-				8E10CB4F1DF4F32C001B64F1 /* sqlite3.h */,
-			);
-			path = sqlCipher;
-			sourceTree = "<group>";
-		};
 		8E10CB5C1DF4F4A8001B64F1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +168,15 @@
 				8E8E5D9C1DF501CA005D405D /* SystemAnnouncement.m */,
 			);
 			path = DataObject;
+			sourceTree = "<group>";
+		};
+		8EE005591E8366CD007BAC55 /* sqlcipher */ = {
+			isa = PBXGroup;
+			children = (
+				8EE0055A1E8366CD007BAC55 /* libsqlcipher.a */,
+				8EE0055B1E8366CD007BAC55 /* sqlite3.h */,
+			);
+			path = sqlcipher;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -209,7 +210,7 @@
 				TargetAttributes = {
 					8E10CB201DF4F2E4001B64F1 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = 65YG889FGF;
+						DevelopmentTeam = M2VE6LGB86;
 						ProvisioningStyle = Manual;
 					};
 				};
@@ -260,7 +261,6 @@
 				8E10CB531DF4F32C001B64F1 /* FMDatabaseAdditions.m in Sources */,
 				8E10CB261DF4F2E4001B64F1 /* main.m in Sources */,
 				8E10CB5A1DF4F415001B64F1 /* RootTableViewController.m in Sources */,
-				8E10CB571DF4F32C001B64F1 /* sqlite3.c in Sources */,
 				8E10CB551DF4F32C001B64F1 /* FMDatabaseQueue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -381,20 +381,25 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = 65YG889FGF;
+				CODE_SIGN_IDENTITY = "iPhone Developer: qi huang (56378TM4Q9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: qi huang (56378TM4Q9)";
+				DEVELOPMENT_TEAM = M2VE6LGB86;
 				INFOPLIST_FILE = DatabaseObject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DatabaseObject/lib/sqlcipher",
+				);
 				OTHER_CFLAGS = (
 					"-DSQLITE_HAS_CODEC",
 					"-DSQLITE_THREADSAFE",
 					"-DSQLCIPHER_CRYPTO_CC",
 					"-DSQLITE_TEMP_STORE=2",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yitong.DatabaseObject;
+				PRODUCT_BUNDLE_IDENTIFIER = com.longwind.DatabaseObject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3a3b0f3f-1893-4a3b-935e-8d141e5b9ac4";
-				PROVISIONING_PROFILE_SPECIFIER = YTEnterpriseDist;
+				PROVISIONING_PROFILE = "86e55e90-69be-4359-8862-b30dc8e9548d";
+				PROVISIONING_PROFILE_SPECIFIER = LongWindDevelopment;
 			};
 			name = Debug;
 		};
@@ -402,20 +407,25 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = 65YG889FGF;
+				CODE_SIGN_IDENTITY = "iPhone Developer: qi huang (56378TM4Q9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: qi huang (56378TM4Q9)";
+				DEVELOPMENT_TEAM = M2VE6LGB86;
 				INFOPLIST_FILE = DatabaseObject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DatabaseObject/lib/sqlcipher",
+				);
 				OTHER_CFLAGS = (
 					"-DSQLITE_HAS_CODEC",
 					"-DSQLITE_THREADSAFE",
 					"-DSQLCIPHER_CRYPTO_CC",
 					"-DSQLITE_TEMP_STORE=2",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yitong.DatabaseObject;
+				PRODUCT_BUNDLE_IDENTIFIER = com.longwind.DatabaseObject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3a3b0f3f-1893-4a3b-935e-8d141e5b9ac4";
-				PROVISIONING_PROFILE_SPECIFIER = YTEnterpriseDist;
+				PROVISIONING_PROFILE = "86e55e90-69be-4359-8862-b30dc8e9548d";
+				PROVISIONING_PROFILE_SPECIFIER = LongWindDevelopment;
 			};
 			name = Release;
 		};
