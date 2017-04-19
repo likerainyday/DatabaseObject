@@ -47,7 +47,7 @@
             NSString *type =[_types objectAtIndex:i];
             if ([kSQLiteText isEqualToString:type]) {
                 [self setValue:[resultSet stringForColumn:name] forKey:name];
-            }else if ([type isEqualToString:kSQLiteBlob]) {
+            }else if ([kSQLiteBlob isEqualToString:type]) {
                 [self setValue:[resultSet dataForColumn:name] forKey:name];
             }else{
                 [self setValue:[NSNumber numberWithLongLong:[resultSet longLongIntForColumn:name]] forKey:name];
@@ -324,7 +324,7 @@
 
 + (NSArray *)totalObjects{
 
-    NSMutableArray *objects =[NSMutableArray array];
+    NSMutableArray *objects =[NSMutableArray new];
     
     [[DatabaseManager manager].dbQueue inDatabase:^(FMDatabase *db) {
         NSString *tableName =NSStringFromClass(self.class);
@@ -368,7 +368,7 @@
 
 + (NSArray *)queryObjectsWithString:(NSString *)string{
     
-    NSMutableArray *objects =[NSMutableArray array];
+    NSMutableArray *objects =[NSMutableArray new];
     NSString *tableName =NSStringFromClass(self.class);
 
     [[DatabaseManager manager].dbQueue inDatabase:^(FMDatabase *db) {
