@@ -17,13 +17,9 @@
 /*
  lib文件包含3个文件夹
  1、fmdb：优秀的三方数据库处理工具。需要引入libsqlite3.tbd
- 2、sqlCipher：对sqlite文件的加密类。需要在target->Build Settings->Other C Flags添加：
- -DSQLITE_HAS_CODEC、
- -DSQLITE_THREADSAFE、
- -DSQLCIPHER_CRYPTO_CC、
- -DSQLITE_TEMP_STORE=2。
- FMDatabase.h中：#define kDatabasePassword @"wyong_sqlite_2016"用于设置数据库密码
- 3、dbManager：基于fmdb对NSObject的二次封装，对于需要存储的数据类，直接继承DatabaseObject基类，直接使用类或者类的实例对象进行(批量)数据的增删改查。
+ 2、sqlcipher：对sqlite文件的加密类。添加了sqlcipher，FMDatabase.h添加了#import "sqlite3.h"
+ 3、dbObject：基于fmdb对NSObject的二次封装。一张表对应一个DatabaseObject子类，对于数据库的增删改查操作直接通过DatabaseObject提供的方法。尽量简化了sql语句的使用
+ 4、macOS下可以通过DB Browser for SQLite来查看sqlcipher加密的数据库
  */
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {

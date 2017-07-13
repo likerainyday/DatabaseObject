@@ -80,7 +80,7 @@
 +(BOOL)deleteObjects:(NSArray *)objects;
 
 /**
- 根据条件删除
+ 条件删除
 
  @param format 条件
  @return 是否删除成功

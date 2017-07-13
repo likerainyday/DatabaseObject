@@ -9,7 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "FMDB.h"
 
-#define kDefaultFileName @"data.sqlite"
+//默认db文件名
+#define kDefaultFileName @"cache.db"
+//默认数据库秘钥
+#define kDefaultSecretKey @"com.wyong.developer.dbObjC"
 
 @interface DatabaseManager : NSObject
 
@@ -31,18 +34,20 @@
 @property(nonatomic,strong,readonly) NSString *dbPath;
 
 /**
- 更改数据库路径
-
- @param fullPath 全路径
- */
-+(void)changeDatabaseFromPath:(NSString *)fullPath;
-
-/**
-  更改数据库路径
+  更改数据库
 
  @param directoryPath 目录路径
  @param fileName 文件名
  */
 +(void)changeDatabaseFromDirectory:(NSString *)directoryPath fileName:(NSString *)fileName;
+
+/**
+ 更改数据库
+
+ @param directoryPath 目录路径
+ @param fileName 文件名
+ @param secretKey 秘钥
+ */
++(void)changeDatabaseFromDirectory:(NSString *)directoryPath fileName:(NSString *)fileName password:(NSString *)secretKey;
 
 @end
