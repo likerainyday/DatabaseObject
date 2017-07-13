@@ -6,15 +6,20 @@ An easier way to use fmdb
 
 1、项目导入lib文件夹，引入libsqlite3.tbd。
 
-2、lib里面默认包含sqlCipher。sqlCipher是用于对sqlite文件设置密码，密码在kDatabasePassword宏定义修改。如果使用sqlCipher，需要在target->Build Settings->Other C Flags添加： -DSQLITE_HAS_CODEC、 -DSQLITE_THREADSAFE、 -DSQLCIPHER_CRYPTO_CC、 -DSQLITE_TEMP_STORE=2。
+2、如果使用sqlcipher，请检查FMDatabase.h是否有import "sqlite3.h"。默认是存在的
 
-3、对于需要数据库操作的数据，继承DatabaseObject基类。
+3、对于需要存储在数据库的表，创建继承DatabaseObject的子类。
+
+4、ignoredProperties数组是你所需要忽略的字段。
 
 使用示例：
 
-1、集成DatabaseObject类自动在数据库中创建表
+1、继承DatabaseObject的子类自动在数据库中创建表
 
+```objective-c
 @interface SystemAnnouncement : DatabaseObject
+@end
+```
 
 2、增 
 
