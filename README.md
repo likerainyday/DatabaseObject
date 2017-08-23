@@ -6,11 +6,13 @@ An easier way to use fmdb
 
 1、项目导入lib文件夹，引入libsqlite3.tbd。
 
-2、如果使用sqlcipher，请检查FMDatabase.h是否有import "sqlite3.h"。默认是存在的
+2、如果使用sqlcipher，请检查FMDatabase.h是否有import "sqlite3.h"，默认是存在的。
 
 3、对于需要存储在数据库的表，创建继承DatabaseObject的子类。
 
 4、ignoredProperties数组是你所需要忽略的字段。
+
+5、changedProperties字典用于表字段变更配置。
 
 使用示例：
 
