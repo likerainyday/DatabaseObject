@@ -8,6 +8,8 @@
 
 #import "RootTableViewController.h"
 #import "SystemAnnouncement.h"
+#import "NSArray+Description.h"
+
 @interface RootTableViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property(nonatomic,strong) NSArray *arrayOfData;
@@ -68,7 +70,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-
+    
     switch (indexPath.row) {
         case 0:
         {
@@ -121,30 +123,30 @@
 }
 
 -(NSArray <SystemAnnouncement *>*)simulateData{
-
+    
     SystemAnnouncement *item1 =[[SystemAnnouncement alloc]init];
     item1.code = @"sa_0";
     item1.title =@"iOS10发布同时，苹果将大力整顿应用商店";
-    item1.content =@"1、未遵守苹果iOS APP数据储存指导方针。\n2、未提供测试账号";
+    item1.content =@"1、未遵守苹果iOS APP数据储存指导方针。2、未提供测试账号";
     item1.timestamp =@"1470264120";
     
     SystemAnnouncement *item2 =[[SystemAnnouncement alloc]init];
     item2.code = @"sa_1";
     item2.title =@"苹果列出了最新App被拒十大原因，你中枪了吗？";
-    item2.content =@"苹果给出了应用被拒top 10原因，如下：\n21% Guideline 2.1 – Performance: App Completeness\n16% More Information Needed\n8%  Guideline 2.3.7 – Performance: Accurate Metadata\n4%  Guideline 4.1 – Design: Copycats    \n3%  Guideline 2.5.4 – Performance: Software Requirements    \n3%  Guideline 3.1.1 – Business: In-App Purchase    \n3%  Guideline 4.0 – Design    \n3%  Guideline 2.3.3 – Performance: Accurate Metadata    \n3%  Guideline 2.3.0 – Performance: Accurate Metadata (screenshots)    \n3%  Guideline 5.1.1 – Legal: Data Collection and Storage";
+    item2.content =@"苹果给出了应用被拒top 10原因，如下：21% Guideline 2.1 – Performance: App Completeness16% More Information Needed8%  Guideline 2.3.7 – Performance: Accurate Metadata4%  Guideline 4.1 – Design: Copycats    3%  Guideline 2.5.4 – Performance: Software Requirements    3%  Guideline 3.1.1 – Business: In-App Purchase    3%  Guideline 4.0 – Design    3%  Guideline 2.3.3 – Performance: Accurate Metadata    3%  Guideline 2.3.0 – Performance: Accurate Metadata (screenshots)    3%  Guideline 5.1.1 – Legal: Data Collection and Storage";
     item2.timestamp =@"1479785400";
     
     SystemAnnouncement *item3 =[[SystemAnnouncement alloc]init];
     item3.code = @"sa_2";
     item3.title =@"iOS10发布同时，苹果将大力整顿应用商店";
-    item3.content =@"一、大规模清理废弃或者质量审核不达标的App\n二、缩短App名称";
+    item3.content =@"一、大规模清理废弃或者质量审核不达标的App二、缩短App名称";
     item3.timestamp =@"1473208380";
     
     return @[item1,item2,item3];
 }
 
 -(void)showAlertWithMessage:(NSString *)message{
-
+    
     UIAlertView *alertView =[[UIAlertView alloc]initWithTitle:nil message:message delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
     [alertView show];
 }

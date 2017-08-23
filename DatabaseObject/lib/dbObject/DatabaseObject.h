@@ -33,6 +33,14 @@
  */
 +(NSArray <NSString *>*)ignoredProperties;
 
+
+/**
+ 表中字段变更 比如{"newName":"name"}，表示原表的name字段变成newName
+
+ @return 变更数字
+ */
++(NSDictionary*)changedProperties;
+
 #pragma mark -数据库操作
 
 /**

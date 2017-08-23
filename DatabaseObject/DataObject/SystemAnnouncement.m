@@ -15,4 +15,9 @@
     return @[@"didRead"];
 }
 
++(NSDictionary *)changedProperties{
+    
+    return @{@"content":@"content1"};
+}
+
 @end

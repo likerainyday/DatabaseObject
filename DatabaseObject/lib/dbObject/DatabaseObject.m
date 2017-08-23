@@ -58,27 +58,30 @@
 }
 
 -(NSString *)description{
-
-    NSString *result =@"";
-    NSDictionary *dict =[self.class propertyDictionary];
     
+    NSDictionary *dict =[self.class propertyDictionary];
     NSMutableArray *proNames =[dict objectForKey:@"name"];
-    for (int i = 0; i < proNames.count; i++) {
-        NSString *proName = [proNames objectAtIndex:i];
-        id  proValue = [self valueForKey:proName];
-        if (i==0) {
-            result =[result stringByAppendingFormat:@"%@:{\n",NSStringFromClass(self.class)];
+
+    if (proNames.count>0) {
+        NSString *result =@"";
+        for (int i = 0; i < proNames.count; i++) {
+            NSString *proName = [proNames objectAtIndex:i];
+            id  proValue = [self valueForKey:proName];
+            BOOL isLast =i==proNames.count-1;
+            result = [result stringByAppendingFormat:@"\n\t%@ = %@%@",proName,proValue,isLast?@"\n":@","];
         }
-        result = [result stringByAppendingFormat:@"%@:%@\n",proName,proValue];
-        if (i ==proNames.count-1){
-            result =[result stringByAppendingString:@"}"];
-        }
+        result =[NSString stringWithFormat:@"{%@}",result];
+        return result;
     }
-    return proNames.count>0?result:[super description];
+    return [super description];
 }
 
 +(NSArray <NSString *>*)ignoredProperties{
     return @[];
+}
+
++(NSDictionary*)changedProperties{
+    return @{};
 }
 
 +(NSDictionary *)propertyDictionary{
@@ -406,24 +409,74 @@
             *rollback =YES;
             return;
         };
+        //处理数据库表升级情况
         NSMutableArray *columns =[NSMutableArray array];
         FMResultSet *resultSet =[db getTableSchema:tableName];
         while ([resultSet next]) {
             NSString *column =[resultSet stringForColumn:@"name"];
             [columns addObject:column];
         }
-        NSPredicate *filterPredicate =[NSPredicate predicateWithFormat:@"not (self in %@)",columns];
-        NSArray *resultArray =[names filteredArrayUsingPredicate:filterPredicate];
-        //表中添加列
-        for (NSString *column in resultArray) {
-            NSUInteger index =[names indexOfObject:column];
-            NSString *proType =[[dict objectForKey:@"type"] objectAtIndex:index];
-            NSString *fieldSql =[NSString stringWithFormat:@"%@ %@",column,proType];
-            NSString *sql =[NSString stringWithFormat:@"alter table %@ add column %@ ",NSStringFromClass(self.class),fieldSql];
-            if (![db executeUpdate:sql]) {
+        NSPredicate *changePredicate =[NSPredicate predicateWithFormat:@"not (self in %@)",names];
+        NSArray *changedArray =[columns filteredArrayUsingPredicate:changePredicate];
+        if (changedArray && changedArray.count>0) {
+            //原表字段有减少或者字段变更
+            //1、修改原表名
+            NSString *renameSql =[NSString stringWithFormat:@"alter table '%@' rename to '%@-temporary';",tableName,tableName];
+            if (![db executeUpdate:renameSql]) {
                 success =NO;
                 *rollback =YES;
                 return ;
+            }
+            //2、创建新表
+            NSString *createSql =[NSString stringWithFormat:@"create table if not exists %@(%@);",tableName,fieldString];
+            if (![db executeUpdate:createSql]) {
+                success =NO;
+                *rollback =YES;
+                return;
+            };
+            NSString *strItem1=@"",*strItem2 =@"";
+            for (NSString *newItem in names) {
+                NSString *changedProperty =[[self changedProperties] objectForKey:newItem];
+                if (changedProperty && [columns containsObject:changedProperty]){
+                    strItem1 =[strItem1 stringByAppendingString:[NSString stringWithFormat:@"%@,",newItem]];
+                    strItem2 =[strItem2 stringByAppendingString:[NSString stringWithFormat:@"%@,",changedProperty]];
+                }else  if ([columns containsObject:newItem]) {
+                    strItem1 =[strItem1 stringByAppendingString:[NSString stringWithFormat:@"%@,",newItem]];
+                    strItem2 =[strItem2 stringByAppendingString:[NSString stringWithFormat:@"%@,",newItem]];
+                }
+            }
+            if (strItem1.length>1) {
+                strItem1 =[strItem1 substringToIndex:strItem1.length-1];
+                strItem2 =[strItem2 substringToIndex:strItem2.length-1];
+            }
+            //3、导入数据
+            NSString *insertSql =[NSString stringWithFormat:@"insert into '%@'(%@) select %@ from '%@-temporary';",tableName,strItem1,strItem2,tableName];
+            if (![db executeUpdate:insertSql]) {
+                success =NO;
+                *rollback =YES;
+                return;
+            };
+            //4、删除临时表
+            NSString *dropSql =[NSString stringWithFormat:@"drop table '%@-temporary';",tableName];
+            if (![db executeUpdate:dropSql]) {
+                success =NO;
+                *rollback =YES;
+                return;
+            };
+        }else{
+            NSPredicate *filterPredicate =[NSPredicate predicateWithFormat:@"not (self in %@)",columns];
+            NSArray *resultArray =[names filteredArrayUsingPredicate:filterPredicate];
+            for (NSString *column in resultArray) {
+                //原表的基础上新增了字段
+                NSUInteger index =[names indexOfObject:column];
+                NSString *proType =[[dict objectForKey:@"type"] objectAtIndex:index];
+                NSString *fieldSql =[NSString stringWithFormat:@"%@ %@",column,proType];
+                NSString *sql =[NSString stringWithFormat:@"alter table %@ add column %@ ",NSStringFromClass(self.class),fieldSql];
+                if (![db executeUpdate:sql]) {
+                    success =NO;
+                    *rollback =YES;
+                    return ;
+                }
             }
         }
     }];
