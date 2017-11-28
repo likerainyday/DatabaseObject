@@ -8,6 +8,11 @@
 #import <sqlite3.h>
 #endif
 
+#if defined(SQLITE_HAS_CODEC)
+SQLITE_API int sqlite3_key(sqlite3 *db, const void *pKey, int nKey);
+SQLITE_API int sqlite3_rekey(sqlite3 *db, const void *pKey, int nKey);
+#endif
+
 @interface FMDatabase () {
     void*               _db;
     BOOL                _isExecutingStatement;
@@ -1502,7 +1507,7 @@ void FMDBBlockSQLiteCallBackFunction(sqlite3_context *context, int argc, sqlite3
 - (NSData *)valueData:(void *)value {
     const void *bytes = sqlite3_value_blob(value);
     int length = sqlite3_value_bytes(value);
-    return bytes ? [NSData dataWithBytes:bytes length:(NSUInteger)length] : nil;
+    return bytes ? [NSData dataWithBytes:bytes length:length] : nil;
 }
 
 - (NSString *)valueString:(void *)value {

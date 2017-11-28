@@ -2,8 +2,8 @@
 //  main.m
 //  DatabaseObject
 //
-//  Created by wangyong on 2016/12/5.
-//  Copyright © 2016年 wyong.developer. All rights reserved.
+//  Created by wangyong on 2017/11/28.
+//  Copyright © 2017年 wyong.developer. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

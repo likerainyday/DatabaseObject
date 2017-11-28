@@ -80,10 +80,13 @@
     _dbQueue =[[FMDatabaseQueue alloc] initWithPath:fullPath];
     //设置加密数据库秘钥
     if ([secretKey isKindOfClass:NSString.class] &&secretKey.length>0) {
-        FMDatabase *db =[_dbQueue valueForKey:@"_db"];
-        if (db) {
+        [_dbQueue inDatabase:^(FMDatabase*db) {
             [db setKey:secretKey];
-        }
+        }];
+//        FMDatabase *db =[_dbQueue valueForKey:@"_db"];
+//        if (db) {
+//            [db setKey:secretKey];
+//        }
     }
     _dbPath =fullPath;
     if (!needUpdateObject) {

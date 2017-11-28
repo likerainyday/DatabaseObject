@@ -3,7 +3,7 @@
 //  DatabaseObject
 //
 //  Created by wangyong on 2017/8/23.
-//  Copyright © 2017年 P&C Information. All rights reserved.
+//  Copyright © 2017年 wyong.developer. All rights reserved.
 //
 
 #import "NSArray+Description.h"
@@ -18,10 +18,9 @@
         [description appendFormat:@"\n%@,",obj];
     }
     if ([description hasSuffix:@","]) {
-        NSString *str = [description substringToIndex:description.length - 1];
-        description = [NSMutableString stringWithString:str];
+        [description deleteCharactersInRange:NSMakeRange(description.length - 1, 1)];
     }
-    [description appendString:@"\n]"];
+    [description appendString:@"]"];
     
     return description;
 }

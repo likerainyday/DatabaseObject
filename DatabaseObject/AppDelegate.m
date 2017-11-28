@@ -2,8 +2,8 @@
 //  AppDelegate.m
 //  DatabaseObject
 //
-//  Created by wangyong on 2016/12/5.
-//  Copyright © 2016年 wyong.developer. All rights reserved.
+//  Created by wangyong on 2017/11/28.
+//  Copyright © 2017年 wyong.developer. All rights reserved.
 //
 
 #import "AppDelegate.h"
@@ -17,13 +17,14 @@
 /*
  lib文件包含3个文件夹
  1、fmdb：优秀的三方数据库处理工具。需要引入libsqlite3.tbd
- 2、sqlcipher：对sqlite文件的加密类。添加了sqlcipher，FMDatabase.h添加了#import "sqlite3.h"
- 3、dbObject：基于fmdb对NSObject的二次封装。一张表对应一个DatabaseObject子类，对于数据库的增删改查操作直接通过DatabaseObject提供的方法。尽量简化了sql语句的使用
+ 2、sqlcipher：对sqlite文件的加密类。添加了sqlcipher，工程Build Settings的Other C Flags添加 -DSQLITE_HAS_CODEC
+ 3、dbObject：基于fmdb对NSObject的二次封装。一张表对应一个DatabaseObject子类，数据库的增删改查操作直接通过DatabaseObject提供的方法。支持数据库表字段的升级和加密。
  4、macOS下可以通过DB Browser for SQLite来查看sqlcipher加密的数据库
  */
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+//    UINavigationController *rootNav =[[UINavigationController alloc]init];
     return YES;
 }
 

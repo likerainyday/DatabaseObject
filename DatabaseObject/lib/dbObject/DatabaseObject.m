@@ -68,7 +68,7 @@
             NSString *proName = [proNames objectAtIndex:i];
             id  proValue = [self valueForKey:proName];
             BOOL isLast =i==proNames.count-1;
-            result = [result stringByAppendingFormat:@"\n\t%@ = %@%@",proName,proValue,isLast?@"\n":@","];
+            result = [result stringByAppendingFormat:@"\n\t%@ = %@%@",proName,proValue,isLast?@"\n":@""];
         }
         result =[NSString stringWithFormat:@"{%@}",result];
         return result;
