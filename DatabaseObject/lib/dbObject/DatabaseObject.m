@@ -279,14 +279,14 @@
 
     va_list ap;
     va_start(ap, format);
-    NSString *sting =[[NSString alloc] initWithFormat:format locale:[NSLocale currentLocale] arguments:ap];
+    NSString *string =[[NSString alloc] initWithFormat:format locale:[NSLocale currentLocale] arguments:ap];
     va_end(ap);
     
     __block BOOL success =NO;
     NSString *tableName =NSStringFromClass(self.class);
 
     [[DatabaseManager manager].dbQueue inDatabase:^(FMDatabase *db) {
-        NSString *sql =[NSString stringWithFormat:@"delete from %@ %@ ",tableName,sting];
+        NSString *sql =[NSString stringWithFormat:@"delete from %@ %@ ",tableName,string];
         success =[db executeUpdate:sql];
     }];
     return success;
@@ -311,9 +311,9 @@
                 return;
             }
             NSString *keyString;
-            NSMutableArray *updateValues =[self.class updateValuesAndKeyString:&keyString];
+            NSMutableArray *updateValues =[object updateValuesAndKeyString:&keyString];
             NSString *sql =[NSString stringWithFormat:@"update %@ set %@ where %@ =?;", tableName, keyString, kSQLitePrimaryKey];
-            [updateValues addObject:[self valueForKey:kSQLitePrimaryKey]];
+            [updateValues addObject:[object valueForKey:kSQLitePrimaryKey]];
             BOOL flag =[db executeUpdate:sql withArgumentsInArray:updateValues];
             if (!flag) {
                 success =NO;
