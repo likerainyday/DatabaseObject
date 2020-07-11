@@ -7,6 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+
+#if __has_include("FMDB.h")
+
 #import "DatabaseManager.h"
 
 @interface DatabaseObject : NSObject
@@ -156,3 +159,5 @@
 +(BOOL)clearTable;
 
 @end
+
+#endif

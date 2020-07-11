@@ -7,6 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+
+#if __has_include("FMDB.h")
+
 #import "FMDB.h"
 
 //默认db文件名
@@ -51,3 +54,5 @@
 +(void)changeDatabaseFromDirectory:(NSString *)directoryPath fileName:(NSString *)fileName password:(NSString *)secretKey;
 
 @end
+
+#endif

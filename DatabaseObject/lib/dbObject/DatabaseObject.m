@@ -7,6 +7,9 @@
 //
 
 #import "DatabaseObject.h"
+
+#if __has_include("FMDB.h")
+
 #import <objc/runtime.h>
 
 /*SQLite数据类型*/
@@ -507,3 +510,5 @@
 }
 
 @end
+
+#endif

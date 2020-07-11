@@ -7,6 +7,9 @@
 //
 
 #import "DatabaseManager.h"
+
+#if __has_include("FMDB.h")
+
 #import "DatabaseObject.h"
 #import <objc/runtime.h>
 
@@ -112,3 +115,5 @@
 }
 
 @end
+
+#endif
