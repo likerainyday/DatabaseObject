@@ -2,7 +2,7 @@
 
 An easier way to use fmdb
 
-如何使用：
+如何使用：(现已修改为pods工程)
 
 1、项目导入lib文件夹，引入libsqlite3.tbd。
 
